@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A cross-lingual TACRED aligner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <script src="mithril.js"></script>
+    <script src="vis.min.js"></script>
+    <script src="main.js"></script>
+    <script src="components.js"></script>
+</head>
+<style>
+    body {
+        font-family: 'Noto Sans', sans-serif;
+        font-size: 12pt;
+    }
+    input[type=text] {
+        font-family: 'Noto Sans', sans-serif;
+        font-size: 12pt;
+    }
+    .korean {
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+    .parse-div {
+        border: 1px solid grey;
+        padding: 10px;
+        border-radius: 3px;
+        margin-bottom: 10px;
+    }
+    .endpoint-select {
+        width: 120px;
+        padding: 5px;
+        font-size: 11pt;
+        font-family: 'Noto Sans', sans-serif;
+        margin-bottom: 3px;
+    }
+    .token-button {
+        display: inline-block;
+        padding: 7px;
+        border: 1px dotted dimgrey;
+        border-radius: 2px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    .token-button:hover {
+        border-color: white;
+        color: white;
+        background-color: black !important;
+        cursor: pointer;
+    }
+    input[type=button] {
+        background-color: lightgray;
+        border: none;
+        padding: 10px;
+        font-size: 12pt;
+    }
+</style>
+<body style="margin: 0; padding: 30px;">
+<div id="main">
+    <input type="radio" id="ko-radio" name="lang-select-radio"><label for="ko-radio">Korean</label>
+    <input type="radio" id="ru-radio" name="lang-select-radio"><label for="ru-radio">Russian</label>
+    <input type="button" value="Next sentence" onclick="getNextSentence();">
+    <label for="id-input">Get sentence by id:</label>
+    <input type="text" id="id-input">
+    <input type="button" value="Submit" onclick="getSentenceById();">
+    <br/><br/>
+    <div class="token-button" style="background-color: goldenrod">Subject span</div>
+    <div class="token-button" style="background-color: salmon">Object span</div>
+    <div class="token-button" style="background-color: lightblue">Trigger span</div>
+    <div id="sourceParse" class="parse-div"></div>
+    <div id="targetParse" class="parse-div"></div>
+    <input type="button" value="Update sentence" onclick="updateSentence();">
+    <input type="button" id="discard-button" value="Discard sentence" style="margin-left: 20px;" onclick="discardSentence();">
+    <br/>
+    <br/>
+    <div id="ud-edit"></div>
+    <br/>
+    <input type="button" value="Refresh the graph" onclick="m.redraw();">
+    <br/>
+    <div id="ud-table"></div>
+    </div>
+</body>
+</html>
